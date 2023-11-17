@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mealie Kroger Link</title>
+</head>
+
+<body>
+    <a href="/">Home</a>
+    <h1>Preview Cart Add</h1>
+    <form action="/add-to-cart" method="POST">
+        <input type="hidden" name="shopping_list_id" value="{{ shopping_list_id }}" />
+        <table>
+            <tr>
+                <th>Item</th>
+                <th>Kroger UPC</th>
+            </tr>
+            {% for list_item in list_items %}
+            <tr>
+                <td>{{ list_item.display }}</td>
+                {% if list_item.food is not none %}
+                    <td>{{ list_item.food.extras['kroger_upc'] }}</td>
+                {% else %}
+                    <td></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+        <button type="submit">Confirm Add to Cart</button>
+    </form>
+
+
+    {#
+    {% if location is not none %}
+    <div>Looks like you're shopping {{ location.name }}</div>
+    {% else %}
+    <form action="/locations">
+        <label for="zip">Zip Code:</label><br>
+        <input type="text" id="zip" name="zip">
+        <button type="submit">Submit</button>
+    </form>
+    {% endif %} #}
+
+</body>
+
+</html>

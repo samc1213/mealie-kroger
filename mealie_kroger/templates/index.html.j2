@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mealie Kroger Link</title>
+</head>
+
+<body>
+    <h1>Mealie-Kroger Link</h1>
+    <a href="/link-foods">Link Foods to Kroger</a>
+
+    <h2>Choose List</h2>
+    <table>
+        <tr>
+            <th>Shopping List</th>
+            <th>Add To Cart</th>
+        </tr>
+        {% for shopping_list in shopping_lists %}
+        <tr>
+            <td>{{ shopping_list.name }}</td>
+            <td><a href="/add-to-cart?list_id={{ shopping_list.id }}">Add foods to Kroger cart</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {# <form action="/locations">
+        <label for="zip">Zip Code:</label><br>
+        <input type="text" name="zip">
+        <button type="submit">Submit</button>
+    </form> #}
+
+    {#
+    {% if location is not none %}
+    <div>Looks like you're shopping {{ location.name }}</div>
+    {% else %}
+    <form action="/locations">
+        <label for="zip">Zip Code:</label><br>
+        <input type="text" id="zip" name="zip">
+        <button type="submit">Submit</button>
+    </form>
+    {% endif %} #}
+
+</body>
+
+</html>

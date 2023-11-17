@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mealie Kroger Link</title>
+</head>
+
+<body>
+    <a href="/">Home</a>
+    <h1>Link Foods</h1>
+
+    <table>
+        <tr>
+            <th>Food</th>
+            <th>Kroger UPC</th>
+        </tr>
+        {% for food in foods %}
+        <tr>
+            <td>{{ food.food.name }}</td>
+            <td>
+                <form action="/link-food" method="POST">
+                    <input type="hidden" name="id" value="{{ food.food.id }}" />
+                    <input type="hidden" name="extras" value="{{ food.extras_escaped }}" />
+                    <input type="hidden" name="name" value="{{ food.food.name }}" />
+                    {% if food.food is defined %}
+                        {% if 'kroger_upc' in food.food.extras %}
+                        <input type="text" name="upc" id="upc" value="{{ food.food.extras['kroger_upc'] }}" />
+                        {% else %}
+                        <input type="text" name="upc" id="upc" />
+                        {%endif %}
+                    {% else %}
+                    <input type="text" name="upc" id="upc" />
+                    {% endif %}
+                    <button action="submit">Link</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    {#
+    {% if location is not none %}
+    <div>Looks like you're shopping {{ location.name }}</div>
+    {% else %}
+    <form action="/locations">
+        <label for="zip">Zip Code:</label><br>
+        <input type="text" id="zip" name="zip">
+        <button type="submit">Submit</button>
+    </form>
+    {% endif %} #}
+
+</body>
+
+</html>
