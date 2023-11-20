@@ -1,0 +1,14 @@
+version: "2.4"
+
+services:
+  mealie-kroger:
+    image: ghcr.io/samc1213/mealie-kroger:master
+    container_name: mealie-kroger
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+    environment:
+      MEALIE_URL: https://mealie.mydomain.com/
+      MEALIE_API_TOKEN: topsecret
+      KROGER_CLIENT_ID: client-id
+      KROGER_CLIENT_SECRET: topsecret
